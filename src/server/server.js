@@ -4,9 +4,8 @@ import bodyParser from "body-parser";
 import { connectDB } from "./connect-db";
 import "./initialize-db";
 import { authenticateRoute } from "./authenticate";
-import path from 'path'
-
-
+import path from "path";
+import { MongoClient } from "mongodb";
 
 let port = process.env.PORT || 7777;
 let app = express();
@@ -17,10 +16,10 @@ app.use(cors(), bodyParser.urlencoded({ extended: true }), bodyParser.json());
 
 authenticateRoute(app);
 
-if (process.env.NODE_ENV ===`production`) {
-  app.use(express.static(path.resolve(__dirname, `.../../dis`))); 
-  app.get('/*', (req, res) => {
-    res.sendFile(path.resolve('index.html')); 
+if (process.env.NODE_ENV === `production`) {
+  app.use(express.static(path.resolve(__dirname, `.../../dis`)));
+  app.get("/*", (req, res) => {
+    res.sendFile(path.resolve("index.html"));
   });
 }
 
