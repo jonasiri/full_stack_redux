@@ -11,8 +11,9 @@
     "dev": "webpack-dev-server --open",
     "initialize": "babel-node src/server/initialize-db",
     "server": "cross-env NODE_ENV=production babel-node src/server",
+    "server-dev": "nodemon src/server --exec babel-node src/server",
     "server-test": "babel-node src/server/spec",
-    "start-dev": "concurrently \"npm run server\" \"npm run dev\""
+    "start-dev": "concurrently \"npm run server-dev\" \"npm run dev\""
   },
   "keywords": [],
   "author": "",
