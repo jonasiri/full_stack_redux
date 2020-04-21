@@ -1,11 +1,11 @@
 import { take, put, select } from "redux-saga/effects";
 import uuid from "uuid";
 import axios from "axios";
-import {history} from './history'
+import { history } from "./history";
 
 import * as mutations from "./mutations";
 
-const url = process.env.NODE_ENV == `production` ? `` :  "http://localhost:7777";
+const url = process.env.NODE_ENV == `production` ? `` : "http://localhost:7777";
 
 export function* taskCreationSaga() {
   while (true) {
@@ -25,7 +25,7 @@ export function* taskCreationSaga() {
   }
 }
 
-export function* taskModificationSage() {
+export function* taskModificationSaga() {
   while (true) {
     const task = yield take([
       mutations.SET_TASK_GROUP,
@@ -49,21 +49,20 @@ export function* userAuthenticationSaga() {
       mutations.REQUEST_AUTHENTICATE_USER
     );
     try {
-      const { data } = yield  axios.post(url + `/authenticate`, {
+      const { data } = yield axios.post(url + `/authenticate`, {
         username,
         password,
       });
-      console.log(data); 
+      console.log(data);
       if (!data) {
         throw new Error();
       }
       yield put(mutations.setState(data.state));
-      yield put(mutations.processAuthenticateUser(mutations.AUTHENTICATED ));
-      history.push('/dashboard');
+      yield put(mutations.processAuthenticateUser(mutations.AUTHENTICATED));
+      history.push("/dashboard");
     } catch (e) {
       console.log("Can't authenticate", e);
       yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
     }
-
   }
 }

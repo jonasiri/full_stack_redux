@@ -8,7 +8,7 @@ export const PROCESSING_AUTHENTICATE_USER = "PROCESSING_AUTHENTICATE_USER";
 export const AUTHENTICATING = "AUTHENTICATING";
 export const AUTHENTICATED = "AUTHENTICATED";
 export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
-export const SET_STATE = 'SET_STATE'
+export const SET_STATE = "SET_STATE";
 
 export const requestTaskCreation = (groupID) => ({
   type: REQUEST_TASK_CREATION,
@@ -32,10 +32,10 @@ export const setTaskName = (id, name) => ({
   taskID: id,
   name,
 });
-export const setTaskGroup = (id, group) => ({
+export const setTaskGroup = (taskID, groupID) => ({
   type: SET_TASK_GROUP,
-  taskID: id,
-  group,
+  taskID,
+  groupID,
 });
 
 export const requestAutenticateUser = (username, password) => ({
@@ -54,6 +54,6 @@ export const processAuthenticateUser = (
 });
 
 export const setState = (state = {}) => ({
-  type: SET_STATE, 
-  state
-})
+  type: SET_STATE,
+  state,
+});
